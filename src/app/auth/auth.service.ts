@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {BehaviorSubject, catchError, Subject, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, tap, throwError} from "rxjs";
 import {User} from "./user-model";
+import {Router} from "@angular/router";
 
 export interface AuthResponseData {
   kind: string;
@@ -20,8 +21,10 @@ export class AuthService {
 
   // @ts-ignore
   user = new BehaviorSubject<User>(null);
+  tokenExpTimer: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
   }
 
   signUp(email: string, password: string) {
@@ -69,5 +72,40 @@ export class AuthService {
     const expDate = new Date(new Date().getTime() + expiresIn * 1000); //because milliseconds
     const user = new User(email, userId, token, expDate);
     this.user.next(user);
+    this.autoLogout(expiresIn * 1000);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  logOut() {
+    // @ts-ignore
+    this.user.next(null);
+    this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
+    if (this.tokenExpTimer) clearTimeout(this.tokenExpTimer);
+    this.tokenExpTimer = null;
+  }
+
+  autoLogin() {
+    const userData: {
+      email: string,
+      id: string,
+      _token: string,
+      _tokenExpirationDate: string
+    } =     // @ts-ignore
+      JSON.parse(localStorage.getItem('userData'));
+    if (!userData) return;
+    const loggedinUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+    if (loggedinUser.token) {
+      this.user.next(loggedinUser);
+      const expDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime(); // future date minus current date in ms
+      this.autoLogout(expDuration);
+    }
+  }
+
+  autoLogout(expDuration: number) {
+    console.log(expDuration);
+    this.tokenExpTimer = setTimeout(() => {
+      this.logOut();
+    }, expDuration);
   }
 }
