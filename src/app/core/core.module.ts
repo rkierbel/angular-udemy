@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RecipeService} from "../recipebook/recipe.service";
-import {ShoppinglistService} from "../shoppinglist/shoppinglist.service";
+import {ShoppinglistService} from "../shopping-list/shoppinglist.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "../auth/auth.interceptor";
+import {LoggingService} from "../logging.service";
 
 
 

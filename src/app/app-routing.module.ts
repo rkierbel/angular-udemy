@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Route, RouterModule} from "@angular/router";
+import {PreloadAllModules, PreloadingStrategy, Route, RouterModule} from "@angular/router";
 
 const routes: Route[] = [
   {path: '', redirectTo: '/recipes', pathMatch: 'full'},
@@ -14,7 +14,7 @@ const routes: Route[] = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
   ],
   exports: [RouterModule]
 })

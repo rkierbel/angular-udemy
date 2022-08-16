@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
+import {LoggingService} from "./logging.service";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import {AuthService} from "./auth/auth.service";
 export class AppComponent implements OnInit {
   loadedFeature = 'recipe';
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService,
+              private logger: LoggingService) {
   }
 
   onNavigate(feature: string) {
@@ -18,6 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.autoLogin();
+    this.logger.printLog("Hello from AppComponent ngOnInit");
   }
 
 

@@ -6,11 +6,10 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AlertComponent} from './shared/alert/alert.component';
 import {ReturnToRecipesDirective} from "./shared/return-to-recipes.directive";
-import {ShoppingListModule} from "./shopping-list/shopping-list.module";
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
-import {AuthModule} from "./auth/auth.module";
 import {BrowserModule} from "@angular/platform-browser";
+import {LoggingService} from "./logging.service";
 
 @NgModule({
   declarations: [
@@ -25,6 +24,7 @@ import {BrowserModule} from "@angular/platform-browser";
     BrowserModule,
     CoreModule,
   ],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents: [AlertComponent]
 })
