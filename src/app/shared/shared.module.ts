@@ -5,7 +5,6 @@ import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner/loading
 import {DropdownDirective} from "./dropdown.directive";
 import {PlaceholderDirective} from "./placeholder.directive";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import {BrowserModule} from "@angular/platform-browser";
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    BrowserModule
+    ReactiveFormsModule
   ],
   exports: [
     AlertComponent,
@@ -27,8 +25,7 @@ import {BrowserModule} from "@angular/platform-browser";
     PlaceholderDirective,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    BrowserModule
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
