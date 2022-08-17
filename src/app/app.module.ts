@@ -9,7 +9,8 @@ import {ReturnToRecipesDirective} from "./shared/return-to-recipes.directive";
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {BrowserModule} from "@angular/platform-browser";
-import {LoggingService} from "./logging.service";
+import {StoreModule} from "@ngrx/store";
+import {shoppingListReducer} from "./shopping/shopping-list/store/shopping-list-reducer";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import {LoggingService} from "./logging.service";
     SharedModule,
     BrowserModule,
     CoreModule,
+    // @ts-ignore
+    StoreModule.forRoot({shoppingList: shoppingListReducer})
   ],
   providers: [],
   bootstrap: [AppComponent],

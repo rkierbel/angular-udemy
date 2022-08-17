@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {RecipesComponent} from "../recipebook/recipes.component";
+import {RecipesComponent} from "./recipes.component";
 import {AuthGuard} from "../auth/auth-guard";
-import {WelcomeRecipesComponent} from "../recipebook/welcome-recipes/welcome-recipes.component";
-import {RecipeEditComponent} from "../recipebook/recipe-edit/recipe-edit.component";
-import {RecipeDetailComponent} from "../recipebook/recipe-detail/recipe-detail.component";
+import {WelcomeRecipesComponent} from "./welcome-recipes/welcome-recipes.component";
+import {RecipeEditComponent} from "./recipe-edit/recipe-edit.component";
+import {RecipeDetailComponent} from "./recipe-detail/recipe-detail.component";
 import {RecipeResolverService} from "../recipe-resolver.service";
 
 const routes: Routes = [
