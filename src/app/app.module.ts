@@ -10,7 +10,9 @@ import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {BrowserModule} from "@angular/platform-browser";
 import {StoreModule} from "@ngrx/store";
-import {shoppingListReducer} from "./shopping/shopping-list/store/shopping-list-reducer";
+import * as fromRoot from "./store/app-reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffects} from "./auth/store/auth-effects";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {shoppingListReducer} from "./shopping/shopping-list/store/shopping-list-
     BrowserModule,
     CoreModule,
     // @ts-ignore
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    StoreModule.forRoot(fromRoot.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
